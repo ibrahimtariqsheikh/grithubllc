@@ -46,7 +46,7 @@ const NavigationBar = () => {
             1
           </div>
         </div>
-        <Button size={"icon"} className="hidden md:flex opacity-80">
+        <Button size={"icon"} className="hidden lg:flex opacity-80">
           <Menu className="w-4 h-4" />
         </Button>
       </section>

@@ -1,26 +1,17 @@
 // Import necessary functionalities from Redux Persist
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
+import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import countReducer from "@/lib/features/count/countSlice";
+import shopReducer from "@/lib/features/shop/shopSlice";
 
 const combinedReducers = combineReducers({
-  count: countReducer,
+  shop: shopReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["count"],
+  whitelist: ["shop"],
 };
 
 const makeConfiguredStore = () =>

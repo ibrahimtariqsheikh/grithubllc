@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <main className="flex flex-col gap-10 min-h-screen ">
       <section className="grid lg:grid-cols-3 mt-10 mx-10 lg:mx-20">
-        <div className="grid gap-6 p-10 col-span-1">
+        <div className="grid gap-6 lg:p-10 col-span-1">
           <h1 className="text-6xl font-bold leading-tight">
             Shop your daily utensiles
           </h1>
@@ -22,7 +22,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hidden lg:block p-10 col-span-2">
+        <div className="hidden lg:block lg:p-10 col-span-2">
           <div className="grid grid-cols-3 gap-5">
             <div className="bg-neutral-100 w-full h rounded-2xl"></div>
             <div className="bg-neutral-100 w-full h-72 rounded-2xl"></div>
@@ -30,7 +30,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="mx-10 lg:mx-20 p-10">
+      <section className="mx-10 lg:mx-20 lg:p-10 mb-10">
         <div className="flex items-center justify-between">
           <h1 className="text-5xl font-bold leading-tight">New Arrivals</h1>
           <span className="font-sans hidden lg:block">See All</span>
