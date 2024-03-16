@@ -9,29 +9,13 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import createWebStorage from "redux-persist/lib/storage/createWebStorage";
-
-import { configureStore } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import countReducer from "@/lib/features/count/countSlice";
 
-const createNoopStorage = () => {
-  return {
-    getItem(_key: any) {
-      return Promise.resolve(null);
-    },
-    setItem(_key: any, value: any) {
-      return Promise.resolve(value);
-    },
-    removeItem(_key: any) {
-      return Promise.resolve();
-    },
-  };
-};
-
-const storage =
-  typeof window !== "undefined"
-    ? createWebStorage("local")
-    : createNoopStorage();
+const combinedReducers = combineReducers({
+  count: countReducer,
+});
 
 const persistConfig = {
   key: "root",
@@ -39,25 +23,25 @@ const persistConfig = {
   whitelist: ["count"],
 };
 
-const persistedReducer = persistReducer(persistConfig, countReducer);
+const makeConfiguredStore = () =>
+  configureStore({
+    reducer: combinedReducers,
+  });
 
 export const makeStore = () => {
-  const store = configureStore({
-    reducer: {
-      count: persistedReducer,
-    },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }),
-  });
-  const persistor = persistStore(store);
-  return { store, persistor };
+  const isServer = typeof window === "undefined";
+  if (isServer) {
+    return makeConfiguredStore();
+  } else {
+    const persistedReducer = persistReducer(persistConfig, combinedReducers);
+    let store: any = configureStore({
+      reducer: persistedReducer,
+    });
+    store.__persistor = persistStore(store);
+    return store;
+  }
 };
 
-export type AppStore = ReturnType<typeof makeStore>["store"];
-export type AppPersistor = ReturnType<typeof makeStore>["persistor"];
+export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
