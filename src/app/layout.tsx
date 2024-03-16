@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { BioRhyme, Cormorant, Encode_Sans, Manrope } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import NavigationBar from "@/components/self/navbar";
 import Footer from "@/components/self/footer";
 import clsx from "clsx";
 
-const font = Rubik({
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+const font = Cormorant({
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -24,10 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={clsx(
-          font.className,
-          "font-sans antialiased overflow-x-hidden w-full"
-        )}
+        className={clsx(font.className, "antialiased overflow-x-hidden w-full")}
       >
         <StoreProvider>
           <NavigationBar />

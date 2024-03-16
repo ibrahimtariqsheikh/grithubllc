@@ -8,7 +8,10 @@ import { Command, CommandInput } from "../ui/command";
 const NavigationBar = () => {
   return (
     <div className="h-min pt-10 pb-4 flex justify-between items-center sticky top-0 z-50 border-b bg-background">
-      <section className="hidden md:flex md:gap-4 lg:gap-8 text-sm mx-20">
+      <Button size={"icon"} className="lg:hidden opacity-80 mx-10">
+        <Menu className="w-4 h-4" />
+      </Button>
+      <section className="hidden lg:flex md:gap-4 lg:gap-8 text-sm mx-20 font-sans">
         <Link href={"#"} className="hover:underline ">
           HOME
         </Link>
@@ -31,15 +34,15 @@ const NavigationBar = () => {
           quality={100}
         />
       </section>
-      <section className="flex md:gap-4 lg:gap-8 ml-auto  mx-20">
-        <Command>
-          <CommandInput placeholder="Search" />
+      <section className="flex md:gap-4 lg:gap-8 ml-auto  mx-10 lg:mx-20">
+        <Command className="hidden lg:flex">
+          <CommandInput placeholder="Search" className="font-sans" />
         </Command>
         <div className="relative">
           <Button size={"icon"}>
             <ShoppingBag className="w-4 h-4 opacity-80" />
           </Button>
-          <div className="absolute rounded-full w-5 h-5 bg-black text-white text-xs flex items-center justify-center left-6 -top-1">
+          <div className="absolute rounded-full w-5 h-5 bg-black text-white text-xs flex items-center justify-center left-6 -top-1 font-sans">
             1
           </div>
         </div>
